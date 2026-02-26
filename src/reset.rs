@@ -6,8 +6,8 @@ use nrf52840_hal as hal;
 /// Magic numbers for bootloader configuration
 /// see https://github.com/adafruit/Adafruit_nRF52_Bootloader/blob/master/src/main.c#L96
 enum BootloaderMagic {
-    /// Magiv value for jump to OTA application
-    OtaAppJum = 0xB1,
+    /// Magic value for jump to OTA application
+    OtaApplication = 0xB1,
     /// Magic value to reset into OTA mode
     OtaReset = 0xA8,
     /// Magic value to reset into serial mode
@@ -30,7 +30,7 @@ fn reset_magic(magic: BootloaderMagic) -> ! {
 
 /// Resets the device into Device Firmware Update mode (DFU).
 pub fn reset_into_app() -> ! {
-    reset_magic(BootloaderMagic::OtaAppJum);
+    reset_magic(BootloaderMagic::OtaApplication);
 }
 
 /// Resets into OTA mode, which will wait for a new firmware to be writte.
