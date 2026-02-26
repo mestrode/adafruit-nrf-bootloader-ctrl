@@ -9,7 +9,7 @@ repository = "https://github.com/mestrode/adafruit_nrf52_bootloader_ctrl"
 keywords = ["nrf52", "bootloader", "adafruit"]
 categories = ["embedded", "no-std"]
 readme = "README.md"
-rust-version = "1.93"
+rust-version = "1.92"
 
 [dependencies]
 nrf52840-hal = "0.19.0"
