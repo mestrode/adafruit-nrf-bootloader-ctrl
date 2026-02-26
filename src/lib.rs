@@ -1,6 +1,8 @@
 //! Bootloader modules for nrf52 boards
 //! Provides functions to reset the decive into different bootloader modes
 
+#![no_std]
+
 use nrf52840_hal as hal;
 
 /// Magic numbers for bootloader configuration
