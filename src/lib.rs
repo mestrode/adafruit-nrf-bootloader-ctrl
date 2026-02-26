@@ -20,52 +20,37 @@ enum BootloaderMagic {
     SkipBootloader = 0x6d,
 }
 
-/// Resets the device into Device Firmware Update mode (DFU).
-pub fn reset_into_app() -> ! {
+/// helper function, writes Magic number into POWER:GPREGRET and executes reset
+fn reset_magic(magic: BootloaderMagic) -> ! {
     unsafe {
         (*hal::pac::POWER::PTR)
             .gpregret
-            .write(|w| w.bits(BootloaderMagic::OtaAppJum as u32))
+            .write(|w| w.bits(magic as u32))
     };
     hal::pac::SCB::sys_reset();
+}
+
+/// Resets the device into Device Firmware Update mode (DFU).
+pub fn reset_into_app() -> ! {
+    reset_magic(BootloaderMagic::OtaAppJum);
 }
 
 /// Resets into OTA mode, which will wait for a new firmware to be writte.
 pub fn reset_into_ota() -> ! {
-    unsafe {
-        (*hal::pac::POWER::PTR)
-            .gpregret
-            .write(|w| w.bits(BootloaderMagic::OtaReset as u32))
-    };
-    hal::pac::SCB::sys_reset();
+    reset_magic(BootloaderMagic::OtaReset);
 }
 
 /// Resets into serial only mode.
 pub fn reset_into_serial_only() -> ! {
-    unsafe {
-        (*hal::pac::POWER::PTR)
-            .gpregret
-            .write(|w| w.bits(BootloaderMagic::SerialOnlyReset as u32))
-    };
-    hal::pac::SCB::sys_reset();
+    reset_magic(BootloaderMagic::SerialOnlyReset);
 }
 
 /// Resets the device into Device Firmware Update mode (UF2).
 pub fn reset_into_uf2() -> ! {
-    unsafe {
-        (*hal::pac::POWER::PTR)
-            .gpregret
-            .write(|w| w.bits(BootloaderMagic::Uf2Reset as u32))
-    };
-    hal::pac::SCB::sys_reset();
+    reset_magic(BootloaderMagic::Uf2Reset);
 }
 
 /// Resets and skips the bootloader. This will reset into the application
 pub fn reset_skip_bootloader() -> ! {
-    unsafe {
-        (*hal::pac::POWER::PTR)
-            .gpregret
-            .write(|w| w.bits(BootloaderMagic::SkipBootloader as u32))
-    };
-    hal::pac::SCB::sys_reset();
+    reset_magic(BootloaderMagic::SkipBootloader);
 }
