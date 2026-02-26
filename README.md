@@ -28,12 +28,12 @@ pub fn reset_skip_bootloader() -> !
 Add this to your `Cargo.toml`:
 ```toml
 [dependencies]
-adafruit_nrf52_bootloader_ctrl = "0.1.0"
+adafruit-nrf52-bootloader-ctrl = "0.1.0"
 ```
 
 switch into Uf2 mode for the next upload:
 ```rust
-use adafruit_nrf52_bootloader_ctrl::reset_into_uf2;
+use adafruit_nrf52_bootloader_ctrl::reset;
 
-reset_into_uf2();
+reset::reset_into_uf2();
 ```
