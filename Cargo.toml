@@ -1,6 +1,6 @@
 [package]
 name = "adafruit-nrf52-bootloader-ctrl"
-version = "0.1.0"
+version = "0.1.1"
 authors = [ "mestrode <35630715+mestrode@users.noreply.github.com>" ]
 description = "Adafruit nrf52 bootloader control library"
 edition = "2024"
